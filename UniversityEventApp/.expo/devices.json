@@ -1,3 +1,8 @@
 {
-  "devices": []
+  "expo": {
+    "name": "Your App Name",
+    "slug": "your-app-slug",
+    "version": "1.0.0",
+    "orientation": "portrait"
+  }
 }

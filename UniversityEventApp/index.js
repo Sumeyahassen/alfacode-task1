@@ -1,96 +1,47 @@
+import React from 'react';
+import {View, Image, Text, Linking, StyleSheet} from 'react-native';
 import {AppRegistry} from 'react-native';
-import React, {useState} from 'react';
-import {View, Text, FlatList, TouchableOpacity, StyleSheet} from 'react-native';
-import App from './src/App';
-
-AppRegistry.registerComponent('UniversityEventApp', () => App);
-const UniversityEventApp = () => {
-  // Event data
-  const eventData = {
-    Monday: [
-      {id: '1', name: 'Coding Workshop', time: '10:00 AM', location: 'CS Lab'},
-      {id: '2', name: 'Faculty Meeting', time: '2:00 PM', location: 'Room 302'},
-    ],
-    Tuesday: [
-      {id: '3', name: 'Sports Day', time: '9:00 AM', location: 'Main Ground'},
-    ],
-    // Add other days...
-  };
-
-  const [selectedDay, setSelectedDay] = useState('Monday');
-  const daysOfWeek = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ];
-
+import App from './App';
+AppRegistry.registerComponent('YourAppName', () => App);
+const App = () => {
   return (
     <View style={styles.container}>
-      {/* Day selector */}
-      <View style={styles.daySelector}>
-        {daysOfWeek.map(day => (
-          <TouchableOpacity
-            key={day}
-            style={[
-              styles.dayButton,
-              selectedDay === day && styles.selectedDayButton,
-            ]}
-            onPress={() => setSelectedDay(day)}>
-            <Text style={selectedDay === day && styles.selectedDayText}>
-              {day.slice(0, 3)}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      {/* Events list */}
-      <FlatList
-        data={eventData[selectedDay]}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <View style={styles.eventCard}>
-            <Text style={styles.eventName}>{item.name}</Text>
-            <Text>⏰ {item.time}</Text>
-            <Text>📍 {item.location}</Text>
-          </View>
-        )}
-        ListEmptyComponent={
-          <Text style={styles.noEvents}>No events today</Text>
-        }
+      <Image
+        source={require('./assets/logo.png')} // Replace with your logo path
+        style={styles.logo}
       />
+      <Text style={styles.title}>Welcome to React Native</Text>
+      <Text
+        style={styles.link}
+        onPress={() => Linking.openURL('https://reactnative.dev')}>
+        Read the docs
+      </Text>
     </View>
   );
 };
 
-// Styles
 const styles = StyleSheet.create({
-  container: {flex: 1, padding: 16, backgroundColor: '#f5f5f5'},
-  daySelector: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  logo: {
+    width: 100,
+    height: 100,
     marginBottom: 20,
   },
-  dayButton: {
-    padding: 10,
-    borderRadius: 5,
-    backgroundColor: '#ddd',
-    alignItems: 'center',
+  title: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
   },
-  selectedDayButton: {backgroundColor: '#6200ee'},
-  selectedDayText: {color: 'white', fontWeight: 'bold'},
-  eventCard: {
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 8,
-    marginBottom: 10,
+  link: {
+    color: 'blue',
+    fontSize: 16,
+    textDecorationLine: 'underline',
   },
-  eventName: {fontSize: 16, fontWeight: 'bold', marginBottom: 5},
-  noEvents: {textAlign: 'center', marginTop: 20, color: '#666'},
 });
 
-// Register the app (required for React Native CLI)
-AppRegistry.registerComponent('UniversityEventApp', () => UniversityEventApp);
+export default App;
